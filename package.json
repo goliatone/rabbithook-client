@@ -1,0 +1,26 @@
+{
+  "name": "rabbithook-client",
+  "version": "0.0.1",
+  "description": "Rabbithook client, build docker images and publish to docker hub on github updates",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goliatone/rabbithook-client.git"
+  },
+  "keywords": [
+    "github",
+    "webhooks",
+    "amqp",
+    "docker",
+    "dockerhub"
+  ],
+  "author": "goliatone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goliatone/rabbithook-client/issues"
+  },
+  "homepage": "https://github.com/goliatone/rabbithook-client#readme"
+}
