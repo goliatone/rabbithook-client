@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/goliatone/rabbithook-client/issues"
   },
-  "homepage": "https://github.com/goliatone/rabbithook-client#readme"
+  "homepage": "https://github.com/goliatone/rabbithook-client#readme",
+  "dependencies": {
+    "amqp": "^0.2.4",
+    "ascoltatori": "^2.0.1"
+  }
 }
