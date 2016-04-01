@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var config = require('../config');
+var client = require('../lib/amqp-client');
+
+var App = require('../lib/app')(config);
+
+client.init(App, config.amqpClient);
+
+
+App.on('github', function(data){
+    console.log('Client: github', data);
+    if(data.event === 'pull_request' ) {
+        console.log('PR');
+    }
+});
+
+App.on('dockerhub', function(data){
+
+});
+
