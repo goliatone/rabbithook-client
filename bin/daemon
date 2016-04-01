@@ -10,7 +10,9 @@ client.init(App, config.amqpClient);
 
 App.on('github', function(data){
     console.log('Client: github', data);
-    if(data.event === 'pull_request' )
+    if(data.event === 'pull_request' ) {
+        console.log('PR');
+    }
 });
 
 App.on('dockerhub', function(data){
