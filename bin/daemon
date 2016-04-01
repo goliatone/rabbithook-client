@@ -20,15 +20,35 @@ App.on('github', function(payload){
         payload.data.pull_request.merged &&
         payload.data.pull_request.base.ref === 'master') {
         console.log('We merged PR to master');
+
     }
 
     //If we publish a new tag or if we creat a new tag
     if((payload.event === 'push' && payload.data.ref.indexOf('refs/tags/') === 0) ||
         (payload.event === 'create' && payload.data.ref_type === 'tag')){
+        var tag = payload.data.ref.replace('refs/tags/', '');
+        console.log('We created a TAG', tag);
 
     }
 
     //if we push to master, and we use the magic words...
+    if(payload.event === 'push' && payload.data.ref === 'refs/heads/master'){
+        /*
+         * if we have txt-command enabled.
+         * This actually looks for:
+         * - "trigger(s) (a) build"
+         * - "trigger(s) (a) build(.*)tag :<tag_name>"
+         * push descriptions:
+         * This PR will trigger a build after merged to master.
+         * This triggers a build and tag it :latest
+         * trigger build and tag it :latest
+         */
+        var textCommand = /triggers?\s+a?\s?build(?:.+tag.+:(\w+))?/ig;
+        if(textCommand && textCommand.test(payload.data.head_commit.message)){
+            var match = textCommand.exec(payload.data.head_commit.message);
+            console.log('We used the comment trigger word!', match[1]);
+        }
+    }
 });
 
 App.on('dockerhub', function(payload){
