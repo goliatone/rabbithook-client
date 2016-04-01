@@ -9,10 +9,17 @@ client.init(App, config.amqpClient);
 
 
 App.on('github', function(data){
-    console.log('Client: github', data);
-    if(data.event === 'pull_request' ) {
-        console.log('PR');
+    console.log('Client: github', JSON.stringify(data, null, 4));
+
+    //If we merge to master
+    if(data.event === 'pull_request' &&
+        data.data.action === 'closed' &&
+        data.data.pull_request.merged &&
+        data.data.pull_request.base.ref === 'master') {
+        console.log('We merged PR to master');
     }
+
+    //If we publish a new tag
 });
 
 App.on('dockerhub', function(data){
