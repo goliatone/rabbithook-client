@@ -47,7 +47,9 @@ App.on('github', function(payload){
         var textCommand = /triggers?\s+a?\s?build(?:.+tag.+:(\w+))?/ig;
         if(textCommand && textCommand.test(payload.data.head_commit.message)){
             var match = textCommand.exec(payload.data.head_commit.message);
-            console.log('We used the comment trigger word!', match[1]);
+            console.log('We used the comment trigger word!');
+            console.log(payload.data.head_commit.message);
+            console.log(match, match && match[1]);
         }
     }
 });
