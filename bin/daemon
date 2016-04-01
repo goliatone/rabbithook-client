@@ -8,21 +8,30 @@ var App = require('../lib/app')(config);
 client.init(App, config.amqpClient);
 
 
-App.on('github', function(data){
-    console.log('Client: github', JSON.stringify(data, null, 4));
+App.on('github', function(payload){
+    console.log('Client: github', JSON.stringify(payload, null, 4));
+
+    //we should filter out by repo.
+    // if(repos.indexOf(payload.repo) === -1) return;
 
     //If we merge to master
-    if(data.event === 'pull_request' &&
-        data.data.action === 'closed' &&
-        data.data.pull_request.merged &&
-        data.data.pull_request.base.ref === 'master') {
+    if(payload.event === 'pull_request' &&
+        payload.data.action === 'closed' &&
+        payload.data.pull_request.merged &&
+        payload.data.pull_request.base.ref === 'master') {
         console.log('We merged PR to master');
     }
 
-    //If we publish a new tag
+    //If we publish a new tag or if we creat a new tag
+    if((payload.event === 'push' && payload.data.ref.indexOf('refs/tags/') === 0) ||
+        (payload.event === 'create' && payload.data.ref_type === 'tag')){
+
+    }
+
+    //if we push to master, and we use the magic words...
 });
 
-App.on('dockerhub', function(data){
+App.on('dockerhub', function(payload){
 
 });
 
