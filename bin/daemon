@@ -52,7 +52,7 @@ App.on('github', function(payload){
             console.log(payload.data.head_commit.message);
             console.log(textCommand);
             console.log(match, match && match[1]);
-            var tagName = match[1] || config.tagName;
+            var tagName = match[1] || config.docker.tagName;
         }
     }
 });
