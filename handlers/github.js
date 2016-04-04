@@ -4,13 +4,17 @@
 module.exports = function $githubHandler_init(options, config){
 
     return function $githubHandler(payload){
-        console.log('Client: github', JSON.stringify(payload, null, 4));
+        console.log('Client: github', payload.event);
+        // console.log('Client: github', JSON.stringify(payload, null, 4));
 
         //we should filter out by repo.
         if( options &&
             options.repos &&
             options.repos.length &&
-            options.repos.indexOf(payload.repo) === -1) return;
+            options.repos.indexOf(payload.repo) === -1)
+        {
+            return console.log('Repo filtered out', payload.repo);
+        }
 
         //If we merge to master
         if( payload.event === 'pull_request' &&
