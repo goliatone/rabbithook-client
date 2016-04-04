@@ -25,6 +25,8 @@
   "homepage": "https://github.com/goliatone/rabbithook-client#readme",
   "dependencies": {
     "amqp": "^0.2.4",
-    "ascoltatori": "^0.21.0"
+    "ascoltatori": "^0.21.0",
+    "gextend": "^0.1.6",
+    "grunt-cli": "^0.1.13"
   }
 }
