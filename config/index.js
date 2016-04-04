@@ -10,6 +10,9 @@ module.exports = {
             url: process.env.NODE_AMQP_ENDPOINT
         }
     },
+    github: {
+        repos: []
+    },
     docker: {
         tagName: 'latest'
     }
