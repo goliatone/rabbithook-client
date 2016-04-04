@@ -13,7 +13,7 @@ module.exports = function $githubHandler_init(options, config){
             options.repos.indexOf(payload.repo) === -1) return;
 
         //If we merge to master
-        if(payload.event === 'pull_request' &&
+        if( payload.event === 'pull_request' &&
             payload.data.action === 'closed' &&
             payload.data.pull_request.merged &&
             payload.data.pull_request.base.ref === 'master') {
@@ -22,7 +22,7 @@ module.exports = function $githubHandler_init(options, config){
         }
 
         //If we publish a new tag or if we creat a new tag
-        if((payload.event === 'push' && payload.data.ref.indexOf('refs/tags/') === 0) ||
+        if( (payload.event === 'push' && payload.data.ref.indexOf('refs/tags/') === 0) ||
             (payload.event === 'create' && payload.data.ref_type === 'tag')){
             var tag = payload.data.ref.replace('refs/tags/', '');
             console.log('We created a TAG', tag);
