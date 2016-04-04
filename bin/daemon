@@ -6,7 +6,7 @@ var client = require('../lib/amqp-client');
 
 console.log('CONF', config);
 
-var App = require('../lib/app')(config);
+var App = require('../lib/app')(config.app);
 
 client.init(App, config.amqpClient);
 
