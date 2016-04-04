@@ -9,5 +9,8 @@ module.exports = {
         client: {
             url: process.env.NODE_AMQP_ENDPOINT
         }
+    },
+    docker: {
+        tagName: 'latest'
     }
 };
