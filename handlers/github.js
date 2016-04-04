@@ -22,7 +22,7 @@ module.exports = function $githubHandler_init(app, options, config){
             payload.data.pull_request.merged &&
             payload.data.pull_request.base.ref === 'master') {
             console.log('We merged PR to master');
-            app.execute('github', payload.repo, payload);
+            return app.execute('github', payload.repo, payload);
         }
 
         //If we publish a new tag or if we creat a new tag
@@ -30,7 +30,7 @@ module.exports = function $githubHandler_init(app, options, config){
             (payload.event === 'create' && payload.data.ref_type === 'tag')){
             var tag = payload.data.ref.replace('refs/tags/', '');
             console.log('We created a TAG', tag);
-            app.execute('github', payload.repo, payload);
+            return app.execute('github', payload.repo, payload);
         }
 
         //if we push to master, and we use the magic words...
@@ -53,7 +53,7 @@ module.exports = function $githubHandler_init(app, options, config){
                 console.log(textCommand);
                 console.log(match, match && match[1]);
                 var tagName = match[1] || config.docker.tagName;
-                app.execute('github', payload.repo, payload, tagName);
+                return app.execute('github', payload.repo, payload, tagName);
             }
         }
     };
