@@ -1,5 +1,8 @@
 'use strict';
 
+var join = require('path').join;
+var resolve = require('path').resolve;
+
 module.exports = {
     amqpClient: {
         type: 'amqp',
@@ -15,5 +18,8 @@ module.exports = {
     },
     docker: {
         tagName: 'latest'
+    },
+    app:{
+        jobsPath: resolve(join(__dirname, '../jobs'))
     }
 };
