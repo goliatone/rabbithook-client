@@ -1,12 +1,16 @@
 'use strict';
 
 
-module.exports = function $githubHandler_init(config){
+module.exports = function $githubHandler_init(options, config){
 
     return function $githubHandler(payload){
         console.log('Client: github', JSON.stringify(payload, null, 4));
+
         //we should filter out by repo.
-        // if(repos.indexOf(payload.repo) === -1) return;
+        if( options &&
+            options.repos &&
+            options.repos.length &&
+            options.repos.indexOf(payload.repo) === -1) return;
 
         //If we merge to master
         if(payload.event === 'pull_request' &&
