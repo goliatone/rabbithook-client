@@ -6,13 +6,14 @@ var resolve = require('path').resolve;
 var extend = require('gextend');
 var Keypath = require('gkeypath');
 var Solver = require('gsolver');
-var Flattener = require('gsolver/node_modules/flattener');
+var Flattener = require('flattener');
 
 var solver = new Solver();
 var userConfig = require('./userconfig');
 
-
-
+/*
+ * This is our default configuration
+ */
 var data = {
     amqpClient: {
         type: 'amqp',
@@ -37,11 +38,11 @@ var data = {
         storage: 'file'
     },
     builds: {
-        concurrent: 1,
+        concurrent: 2,
         'retry-after': 30
     },
     paths: {
-        builds: '${app.url}/tmp/rabbithook-builds',
+        builds: '/tmp/rabbithook-builds',
         sources: '${paths.builds}/sources',
         tars: '${paths.builds}/tars',
         logs: '${paths.builds}/logs'
@@ -57,7 +58,8 @@ var config = Keypath.wrap(data);
 /*
  * We need to use require after solving
  * else it flattener breaks :P
+ * This is a little bit hacky but good for now.
  */
-config.amqp = require('amqp');
+config.target.amqpClient.amqp = require('amqp');
 
 module.exports = config;
