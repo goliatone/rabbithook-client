@@ -23,5 +23,4 @@ WORKDIR /src
 RUN npm install
 
 EXPOSE  8080
-CMD ["node", "bin/daemon"]
-# CMD ["node", "bin/daemon", "--config", "/config.yml"]
+CMD ["node", "bin/daemon", "--config", "/config.yml"]
