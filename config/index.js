@@ -46,6 +46,10 @@ var data = {
         sources: '${paths.builds}/sources',
         tars: '${paths.builds}/tars',
         logs: '${paths.builds}/logs'
+    },
+    routes: {
+        'build-log': '/api/builds/:build/log',
+        'build-link': '/#/projects/:projectName/:build'
     }
 };
 
