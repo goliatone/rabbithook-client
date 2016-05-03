@@ -4,17 +4,19 @@
 var config = require('../config');
 var client = require('../lib/amqp-client');
 
-console.log('CONF', config);
+var App = require('../lib/app')(config.get('app'));
 
-var App = require('../lib/app')(config.app);
-
-client.init(App, config.amqpClient);
+client.init(App, config.get('amqpClient'));
 
 //TODO:checkout this package:
 //https://www.npmjs.com/package/docker-webhooks
-App.on('github', require('../handlers/github')(App, config.github, config));
+App.on('github', require('../handlers/github')(App, config.get('github'), config));
 
 App.on('dockerhub', function(payload){
-
+    console.log('=================================');
+    console.log('DOCKERHUB');
+    console.log('=================================');
+    console.log('on dockerhub', payload);
+    console.log('=================================');
 });
 
