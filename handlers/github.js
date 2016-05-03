@@ -30,7 +30,7 @@ module.exports = function $githubHandler_init(app, options, config){
             (payload.event === 'create' && payload.data.ref_type === 'tag')){
             var tag = payload.data.ref.replace('refs/tags/', '');
             console.log('We created a TAG', tag);
-            return app.execute('github', payload.repo, payload);
+            return app.execute('github', payload.repo, payload, tag);
         }
 
         //if we push to master, and we use the magic words...
