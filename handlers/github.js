@@ -12,6 +12,12 @@ module.exports = function $githubHandler_init(app, options, config){
         console.log(JSON.stringify(payload, null, 4));
         console.log('=================================');
 
+        ////////////////////////////////////
+        ///TODO: We want to move this to
+        ///RabbitHook Server and use it for
+        ///routing. Jobs should be listeners
+        ///to a single topic
+        ////////////////////////////////////
         //we should filter out by repo.
         if( options &&
             options.repos &&
@@ -28,6 +34,14 @@ module.exports = function $githubHandler_init(app, options, config){
             payload.data.pull_request.base.ref === 'master') {
             console.log('We merged PR to master');
             return app.execute('github', payload.repo, payload);
+        }
+
+        //If we want to test something before the PR
+        if(payload.event === 'pull_request' &&
+            payload.data.action === 'opened' &&
+            payload.data.created){
+            //We just made a PR against master, we could run
+            //tests and comment.
         }
 
         //we pushed to master:
