@@ -16,7 +16,7 @@ App.on('dockerhub', function(payload){
     console.log('=================================');
     console.log('DOCKERHUB');
     console.log('=================================');
-    console.log('on dockerhub', payload);
+    console.log(JSON.stringify(payload, null, 4));
     console.log('=================================');
 });
 
