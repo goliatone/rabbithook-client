@@ -7,20 +7,27 @@ RUN apt-get update && \
     apt-get install -y git && \
     apt-get clean
 
-RUN mkdir /tmp/rabbithook-builds
-RUN mkdir /tmp/rabbithook-builds/logs
-RUN mkdir /tmp/rabbithook-builds/tars
-RUN mkdir /tmp/rabbithook-builds/sources
+RUN mkdir -p /tmp/rabbithook-builds/{logs,tars,sources}
 
 COPY . /src
 
 RUN npm install -g npm
 RUN npm update
 
-RUN npm cache clean
+RUN npm config set registry http://registry.npmjs.org/ && \
+    npm config set strict-ssl false
+
+# RUN npm cache clean
+
+#use changes to package.json to force Docker to not use
+#cache. Use docker build --no-cache to force npm install.
+ADD package.json /tmp/package.json
+
+RUN cd /tmp && npm install --production -ddd
+RUN cp -a /tmp/node_modules /src/
 
 WORKDIR /src
-RUN npm install
 
 EXPOSE  8080
+
 CMD ["node", "bin/daemon", "--config", "/config.yml"]
