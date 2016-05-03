@@ -30,6 +30,14 @@ module.exports = function $githubHandler_init(app, options, config){
             return app.execute('github', payload.repo, payload);
         }
 
+        //we pushed to master:
+        if(payload.event === 'push' &&
+           payload.data.ref === 'refs/heads/master'){
+            console.log('We pushed to master');
+            //we should check to see if we want to build on push to master
+            return app.execute('github', payload.repo, payload);
+        }
+
         //If we publish a new tag or if we creat a new tag
         if( (payload.event === 'push' && payload.data.ref.indexOf('refs/tags/') === 0) ||
             (payload.event === 'create' && payload.data.ref_type === 'tag')){
