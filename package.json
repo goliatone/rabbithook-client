@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm test",
     "docker-build": "docker build --rm -t goliatone/rpi-pir-sensor .",
-    "docker-run": "docker run -h rabbithook -v $(pwd)/config.yml:/config.yml -v $(pwd):/src -v $(pwd)/db:/db -v /var/run/docker.sock:/tmp/docker.sock goliatone/rabbithook-client",
+    "docker-run": "docker run --env-file .env -h rabbithook -v $(pwd)/config.yml:/config.yml -v $(pwd)/db:/db -v /var/run/docker.sock:/tmp/docker.sock goliatone/rabbithook-client",
     "docker-bash": "docker run -h rabbithook  -ti -v $(pwd)/config.yml:/config.yml -v $(pwd):/src -v $(pwd)/db:/db -v /var/run/docker.sock:/tmp/docker.sock --entrypoint /bin/bash goliatone/rabbithook-client"
   },
   "repository": {
