@@ -1,0 +1,17 @@
+app:
+  url: 'http://localhost:8080'
+  storage: file
+builds:
+  concurrent: 2 # max number of builds to run in parallel
+  retry-after: 30 # interval, in seconds, for Roger to check whether it can start queued builds
+routes:
+  build-link:       '/#/projects/:projectName/:build'
+paths:
+  builds:  '/tmp/rabbithook-builds'
+  sources: '${paths.builds}/sources'
+  tars:    '${paths.builds}/tars'
+  logs:    '${paths.builds}/logs'
+docker:
+  tagName: 'latest'
+  client:
+    socketPath: '/tmp/docker.sock'
