@@ -65,7 +65,9 @@ docker run -ti -v $(pwd):/src -v /var/run/docker.sock:/tmp/docker.sock goliatone
 docker run -ti -v $(pwd)/example/config.yml:/config.yml -v $(pwd):/src -v $(pwd)/db:/db -v /var/run/docker.sock:/tmp/docker.sock --entrypoint /bin/bash goliatone/rabbithook-client
 
 
-
+Client build time:
+```
 real    26m14.201s
 user    0m52.410s
 sys 0m40.800s
+```
