@@ -7,7 +7,9 @@ RUN apt-get update && \
     apt-get install -y git && \
     apt-get clean
 
-RUN mkdir -p /tmp/rabbithook-builds/{logs,tars,sources}
+RUN mkdir -p /tmp/rabbithook-builds/logs && \
+    mkdir -p /tmp/rabbithook-builds/tars && \
+    mkdir -p /tmp/rabbithook-builds/sources
 
 RUN npm install -g npm
 RUN npm update
