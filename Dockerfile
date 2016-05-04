@@ -9,8 +9,6 @@ RUN apt-get update && \
 
 RUN mkdir -p /tmp/rabbithook-builds/{logs,tars,sources}
 
-COPY . /src
-
 RUN npm install -g npm
 RUN npm update
 
@@ -23,10 +21,12 @@ RUN npm config set registry http://registry.npmjs.org/ && \
 #cache. Use docker build --no-cache to force npm install.
 ADD package.json /tmp/package.json
 
-RUN cd /tmp && npm install --production -ddd
+RUN cd /tmp && npm install -ddd
 RUN cp -a /tmp/node_modules /src/
 
 WORKDIR /src
+
+COPY . /src
 
 EXPOSE  8080
 
