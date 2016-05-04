@@ -1,7 +1,7 @@
 'use strict';
 
 var uuid = require('node-uuid');
-// var builder = require('../lib/builder');
+var builder = require('../lib/builder');
 
 module.exports.execute = function(id, tag, options){
     //We assume that options is a valid payload. TODO: Check :)
@@ -10,7 +10,7 @@ module.exports.execute = function(id, tag, options){
     var dockerOptions = {};
 
     console.log('build', repo, branch, uuid.v4(), dockerOptions);
-    //builder.schedule(repo, branch, uuid.v4(), dockerOptions);
+    builder.schedule(repo, branch, uuid.v4(), dockerOptions);
 };
 
 //Initially we only care to build master, but we should

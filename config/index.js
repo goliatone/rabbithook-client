@@ -39,7 +39,8 @@ var data = {
     },
     builds: {
         concurrent: 2,
-        'retry-after': 30
+        'retry-after': 30,
+        filename: 'build.yml'
     },
     paths: {
         builds: '/tmp/rabbithook-builds',
