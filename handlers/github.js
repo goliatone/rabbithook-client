@@ -6,11 +6,11 @@ module.exports = function $githubHandler_init(app, options, config){
     return function $githubHandler(payload){
         console.log('Client: github', payload.event);
 
-        console.log('=================================');
-        console.log('GITHUB');
-        console.log('=================================');
-        console.log(JSON.stringify(payload, null, 4));
-        console.log('=================================');
+        // console.log('=================================');
+        // console.log('GITHUB');
+        // console.log('=================================');
+        // console.log(JSON.stringify(payload, null, 4));
+        // console.log('=================================');
 
         ////////////////////////////////////
         ///TODO: We want to move this to
