@@ -71,3 +71,7 @@ real    26m14.201s
 user    0m52.410s
 sys 0m40.800s
 ```
+
+
+
+pm2 start --interpreter bash --name rabbithook-client ./bin/launcher
