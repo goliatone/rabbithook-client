@@ -93,3 +93,5 @@ node_modules
 ####################################
 .envset
 docker-compose.yml
+data
+db
