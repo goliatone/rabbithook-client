@@ -5,7 +5,14 @@ builds:
   concurrent: 2 # max number of builds to run in parallel
   retry-after: 30 # interval, in seconds, for Roger to check whether it can start queued builds
 routes:
+  config:           '/api/config'
+  projects:         '/api/projects'
+  build-project:    '/api/build'
+  builds:           '/api/builds'
+  build:            '/api/builds/:build'
+  build-log:        '/api/builds/:build/log'
   build-link:       '/#/projects/:projectName/:build'
+  github-hooks:     '/public/api/hooks/github'
 paths:
   builds:  '/tmp/rabbithook-builds'
   sources: '${paths.builds}/sources'
